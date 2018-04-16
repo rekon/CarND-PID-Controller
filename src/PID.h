@@ -41,6 +41,8 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  void TunePid(double tolerance = 1e-4);
 };
 
 #endif /* PID_H */
