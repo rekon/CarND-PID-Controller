@@ -1,6 +1,9 @@
 #ifndef PID_H
 #define PID_H
 
+#include <iostream>
+#include <numeric>
+
 class PID {
 public:
   /*
@@ -16,6 +19,17 @@ public:
   double Kp;
   double Ki;
   double Kd;
+
+  /*
+  * Tuning Parameters
+  */
+  unsigned long long step;
+  double *dp;
+  double total_err;
+  double best_err;
+  bool should_add; 
+  bool should_subtract;
+  int param_index;
 
   /*
   * Constructor
@@ -35,14 +49,12 @@ public:
   /*
   * Update the PID error variables given cross track error.
   */
-  void UpdateError(double cte);
+  void UpdateError(double cte, double tolerance = 1e-4);
 
   /*
   * Calculate the total PID error.
   */
-  double TotalError();
-
-  void TunePid(double tolerance = 1e-4);
+  double TotalError( double cte );
 };
 
 #endif /* PID_H */
