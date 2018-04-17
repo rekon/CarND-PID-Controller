@@ -27,19 +27,26 @@ void PID::Init(double Kp, double Ki, double Kd) {
 }
 
 void PID::UpdateError(double cte, double tolerance) {
+    int LOWER = 100, UPPER = 2500;
+
     double params[] = { Kp, Ki, Kd };
     double dp_sum = dp[0] + dp[1] + dp[2] ;
+
     d_error = cte - p_error;
     p_error = cte;
     i_error += cte;
     TotalError( cte );
     step++;
 
-    if( step > 100 && step % 20 == 0 && dp_sum > 1e-4 ){
+    if( step >= LOWER &&
+        step <= UPPER &&
+        step % 80 == 0 &&
+        dp_sum > tolerance ){
+            
         cout << "Iteration: " << step << endl;
         cout << "Current total_error: " << total_err << endl;
 
-        if( step == 100 ){
+        if( step == LOWER ){
             best_err = total_err;
             return;
         }
