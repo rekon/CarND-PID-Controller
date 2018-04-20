@@ -27,8 +27,8 @@ public:
   double *dp;
   double total_err;
   double best_err;
-  bool should_add; 
-  bool should_subtract;
+  bool added; 
+  bool subtracted;
   int param_index;
 
   /*
@@ -55,6 +55,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError( double cte );
+
+  /*
+  * Twiddle.
+  */
+  void Twiddle( double tolerance );
 };
 
 #endif /* PID_H */
