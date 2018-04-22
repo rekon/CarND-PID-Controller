@@ -27,7 +27,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
 }
 
 void PID::UpdateError(double cte, double tolerance) {
-    unsigned int LOWER = 100, UPPER = 2500;
+    unsigned int LOWER = 100, UPPER = 3500;
 
     d_error = cte - p_error;
     p_error = cte;
